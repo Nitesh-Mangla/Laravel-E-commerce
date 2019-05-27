@@ -15,8 +15,7 @@ class orderController extends Controller
 
 	public function __construct()
 	{
-		$this->configPaytm = new configPaytm();		
-		
+		$this->configPaytm = new configPaytm();				
 		$this->users = new User();
 	}
 
@@ -90,7 +89,6 @@ class orderController extends Controller
 
     public function endec_paytm()
     {
-
     	function encrypt_e($input, $ky) {
 		$key   = html_entity_decode($ky);
 		$iv = "@@@@&&&&####$$$$";

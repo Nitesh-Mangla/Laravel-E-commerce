@@ -19,6 +19,6 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        //
+        'https://localhost:8080/online_shopping/public/paytmResponseCall'
     ];
 }
