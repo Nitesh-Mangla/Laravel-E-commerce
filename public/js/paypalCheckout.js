@@ -1,6 +1,7 @@
 $(document).ready(function(){
 
 	var let = $(".payamount").val();
+  
   paypal.Buttons({
     createOrder: function(data, actions) {
       return actions.order.create({

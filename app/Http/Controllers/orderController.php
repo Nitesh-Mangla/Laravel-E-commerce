@@ -15,7 +15,9 @@ class orderController extends Controller
 
 	public function __construct()
 	{
-		$this->configPaytm = new configPaytm();				
+		$this->configPaytm = new configPaytm();	
+		$this->configPaytm->config();
+    	$this->endec_paytm();			
 		$this->users = new User();
 	}
 
@@ -28,13 +30,13 @@ class orderController extends Controller
 		$data = $this->handlePaymentRequest( $TXN_AMOUNT, $ORDER_ID );
 		$paramList = $data['paramList'];
 		$checkSum  = $data['checkSum'];
+
 		return view('paytmResponse', compact('PAYTM_TXN_URL', 'paramList', 'checkSum'));
     }
 
     public function handlePaymentRequest( $TXN_AMOUNT, $ORDER_ID )
     {
-    	$this->configPaytm->config();
-    	$this->endec_paytm();
+    	
     	$paramList["MID"] = PAYTM_MERCHANT_MID;
 		$paramList["ORDER_ID"] = $ORDER_ID;
 		$paramList["CUST_ID"] = $ORDER_ID."bjhbxh";
@@ -53,37 +55,23 @@ class orderController extends Controller
 
     public function paytmResponseCallback( Request $request )
     {
-    	$this->configPaytm->config();
-    	$this->endec_paytm();
+    	//dd($request);
     	$paytmChecksum = "";
 		$paramList = array();
 		$isValidChecksum = "FALSE";
-		$paytmChecksum = isset($request->CHECKSUMHASH) ? $request->CHECKSUMHASH : ""; //Sent by Paytm pg
+		$paytmChecksum = isset($request['CHECKSUMHASH']) ? $request['CHECKSUMHASH'] : ""; //Sent by Paytm pg
 		$isValidChecksum = verifychecksum_e($paramList, PAYTM_MERCHANT_KEY, $paytmChecksum);
 		if($isValidChecksum == "TRUE") {
 			echo "<b>Checksum matched and following are the transaction details:</b>" . "<br/>";
 			if ($request['STATUS'] == "TXN_SUCCESS") {
 				echo "<b>Transaction status is success</b>" . "<br/>";
-
-				//Process your transaction here as success transaction.
-				//Verify amount & order id received from Payment gateway with your application's order id and amount.
 			}
 			else {
 				echo "<b>Transaction status is failure</b>" . "<br/>";
 			}
-
-			// if (isset($request) && count($request)>0 )
-			// { 
-			// 	foreach($request as $paramName => $paramValue) {
-			// 			echo "<br/>" . $paramName . " = " . $paramValue;
-			// 	}
-			// }
-			
-
 		}
 		else {
-			echo "<b>Checksum mismatched.</b>";
-			//Process transaction as suspicious.
+			echo "<b>Checksum mismatched.</b>";			
 		}
     }
 

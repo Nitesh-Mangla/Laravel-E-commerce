@@ -15,7 +15,8 @@
 				echo '<input type="hidden" name="' . $name .'" value="' . $value . '">';
 			}
 		?>			
-		 <input type='hidden' name='CHECKSUMHASH' value='<?php echo $checkSum; ?>'>
+		 <input type='hidden' name='CHECKSUMHASH' value='<?php echo $checkSum;  ?>'>
+		
 		</tbody>
 		</table>
 		<script type='text/javascript'>document.f1.submit();</script>

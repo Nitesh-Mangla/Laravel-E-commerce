@@ -35,8 +35,8 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
     'google' => [
-        'client_id' => '',
-        'client_secret' => '',
+        'client_id' => '994086502485-oopjc1r9bscaaqg09fon2rom9af4oudk.apps.googleusercontent.com',
+        'client_secret' => 'NcK8RDzw73rEIuuEKlxfxY92',
         'redirect' => 'https://localhost:8080/online_shopping/public/callback'
     ],
 

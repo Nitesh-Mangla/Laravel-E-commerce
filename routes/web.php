@@ -15,6 +15,10 @@
 		return view('test');
 	});
 
+	Route::GET('/orderConfirmation' ,function(){
+		return view('confirmOrder');
+	});
+
 	Route::GET('/','product_controller@fetchProducts');
 	Auth::routes(['verify' => true]);
 	Route::get('auth/facebook', 'Auth\LoginController@redirectToFacebook');

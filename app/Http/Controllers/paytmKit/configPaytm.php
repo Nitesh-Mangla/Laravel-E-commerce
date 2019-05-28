@@ -11,7 +11,7 @@ class configPaytm extends Controller
 	{
 		define('PAYTM_ENVIRONMENT', 'TEST'); // PROD
 		define('PAYTM_MERCHANT_KEY', 'kaGe9TaDdGZmYvWJ'); //Change this constant's value with Merchant key received from Paytm.
-		define('PAYTM_MERCHANT_MID', 'Zqgece89338537869863'); //Change this constant's value with MID (Merchant ID) received from Paytm.
+		define('PAYTM_MERCHANT_MID', 'UpBrig99467335208831'); //Change this constant's value with MID (Merchant ID) received from Paytm.
 		define('PAYTM_MERCHANT_WEBSITE', 'WEBSTAGING'); //Change this constant's value with Website name received from Paytm.
 
 		$PAYTM_STATUS_QUERY_NEW_URL='https://securegw-stage.paytm.in/merchant-status/getTxnStatus';

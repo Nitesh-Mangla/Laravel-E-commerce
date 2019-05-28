@@ -493,7 +493,7 @@
                                             </li> -->
                                             <li class="payment_method_paypal">
                                                 <!-- <input type="radio" data-order_button_text="Proceed to PayPal" value="paypal" name="payment_method" class="input-radio" id="payment_method_paypal"> -->
-                                                <label for="payment_method_paypal">PayPal<div id="paypal-button-container"></div>  
+                                                <label for="payment_method_paypal">PayPal
                                                 </label>
 
                                                 <div style="display:none;" class="payment_box payment_method_paypal">
