@@ -147,6 +147,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         App\Providers\userprofileModel::class,
+        App\Providers\orderPlaced::class,
 
         /*
          * Package Service Providers...

@@ -20,16 +20,17 @@
         <div class="well">
             <div class="row">
                 <form action="{{ url('/paytmpayment') }}" method="post" name="payment">
+                    @csrf
                 <div class="col-xs-6 col-sm-6 col-md-6">
                     <address>
-                        <input type="hidden" name="address" value="{{$details['address']}}">
+                        <input type="hidden" name="address" value="{{$details['address']}} {{$details['city']}} {{ $details['state'] }} {{ $details['postcode'] }}">
                         <strong>{{$details['address']}}</strong>
                         <br>
                         {{Ucfirst($details['city'])}}
                         <br>
                         {{Ucfirst($details['state'])}} {{$details['postcode']}}
                         <br>
-                        <input type="hidden" name="phone" value="">
+                        <input type="hidden" name="phone" value="{{ $phoneNo }}">
                         <abbr title="Phone">P:</abbr> {{ $phoneNo }}
                     </address>
                 </div>
@@ -60,16 +61,17 @@
                     <tbody>
                         @if( isset( $cardData ) )
                         @foreach( $cardData as $key => $value)
-                            @if( $key != '_token' )
-                        <input type="hidden" name="produuct_id[]" value="{{ $value->product }}">
-                            <input type="hidden" name="price[]" value="{{ $value->price }}">
-                            <input type="hidden" name="quantity[]" value="{{ $value->quantity }}">
-                            <input type="hidden" name="product_total[]" value="{{$tprice}}">
+                           
+                            <input type="hidden" name="product_name[]" value="{{ $value['product'] }}">
+                            <input type="hidden" name="price[]" value="{{ $value['total'] }}">
+                            <input type="hidden" name="quantity[]" value="{{ $value['quantity'] }}">
+                            <!-- <input type="hidden" name="price[]" value="{{$tprice}}"> -->
+                            <input type="hidden" name="id[]" value="{{ $value['id'] }}">
                         <tr>                           
-                            <td class="col-md-9"><em></em>{{ $value->product }}</h4></td>
-                            <td class="col-md-1" style="text-align: center"> {{ $value->quantity }} </td>
-                            <td class="col-md-1 text-center">{{ $value->price/$value->quantity }}</td>
-                            <td class="col-md-1 text-center">{{ $value->price }}</td>
+                            <td class="col-md-9"><em></em>{{ $value['product'] }}</h4></td>
+                            <td class="col-md-1" style="text-align: center"> {{ $value['quantity'] }} </td>
+                            <td class="col-md-1 text-center">{{ $value['price'] }}</td>
+                            <td class="col-md-1 text-center">{{ $value['total'] }}</td>
                         </tr>
                        @endforeach
                        @endif
@@ -77,8 +79,8 @@
                             <td>   </td>
                             <td>   </td>
                             <td class="text-right"><h4><strong>Total: </strong></h4></td>
-                            <input type="hidden" name="total" value="">
-                            <td class="text-center text-danger"><h4><strong>$31.53</strong></h4></td>
+                            <input type="hidden" name="total" value="{{$tprice}}">
+                            <td class="text-center text-danger"><h4><strong>{{ $tprice }}</strong></h4></td>
                         </tr>
                         <tr>
                         	<td><div id="paypal-button-container"></div> </td>
