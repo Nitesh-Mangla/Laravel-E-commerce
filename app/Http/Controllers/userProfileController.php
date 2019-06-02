@@ -11,8 +11,8 @@ class userProfileController extends Controller
 {
     public function userProfileData()
     {
-    	$userData = DB::table('users')->join('userprofile', 'users.id' ,'=', 'userprofile.user_id')
-    		->select('users.*', 'userprofile.*')->where('users.email', Session::get('username'))->get();
+    	$userData = DB::table('users')->join('userprofiles', 'users.id' ,'=', 'userprofiles.user_id')
+    		->select('users.*', 'userprofiles.*')->where('users.email', Session::get('username'))->get();
 
     	return view('userProfile', ['data' => $userData]);
     }
@@ -20,12 +20,12 @@ class userProfileController extends Controller
     public function editUserProfile( Request $request )
     {
     	$data = $request->input('data');
-
+      
         if( !empty($data[4]['value']) )
         {
-            DB::table('userprofile as up')->join('users as u', 'up.user_id', '=', 'u.id')->where('up.id','=', $data[1]['value'])->update(['up.phone_no' => $data[3]['value'], 'u.password' => md5($data[4]['value'])] );
+            DB::table('userprofiles as up')->join('users as u', 'up.user_id', '=', 'u.id')->where('up.id','=', $data[1]['value'])->update(['up.phone_no' => $data[2]['value'], 'u.password' => md5($data[6]['value']), 'address' => $data[3]['value'], 'city' => $data[5]['value'], 'state' => $data[4]['value']] );
         }else{
-            DB::table('userprofile')->where('id','=', $data[1]['value'])->update(['phone_no' => $data[3]['value']] );   
+            DB::table('userprofile')->where('id','=', $data[1]['value'])->update(['phone_no' => $data[2]['value'], 'address' => $data[3]['value'], 'city' => $data[5]['value'], 'state' => $data[4]['value']] );   
         }    	
     } 
 
@@ -45,7 +45,7 @@ class userProfileController extends Controller
             $filename = uniqid() . '_' . time() . '.' . $extension;
             if( $request->file('file')->move($dir, $filename))
             {
-                DB::table('userprofile')->where('id' , $request->input('id'))->update(['image' => $filename]);
+                DB::table('userprofiles')->where('id' , $request->input('id'))->update(['image' => $filename]);
                 echo "Profile Pic Uploaded successfully";
             }else{
                 echo "Error White Uploading Image";

@@ -22,4 +22,8 @@ $(document).ready(function(){
       } );
     }
   }).render('#paypal-button-container');
-})
+
+  $(".paytm_payment").click( function(){
+    document.payment.submit();
+  } );
+});

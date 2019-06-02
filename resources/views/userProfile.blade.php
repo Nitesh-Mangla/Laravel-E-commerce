@@ -121,6 +121,14 @@
                                                 <p>{{ $value->phone_no }}</p>
                                             </div>
                                         </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Address</label>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <p>{{ $value->address.' '.$value->city.' '.$value->state }}</p>
+                                            </div>
+                                        </div>
                                          <div class="row">
                                             <div class="col-md-6">
                                                 <label>Password</label>
@@ -173,6 +181,21 @@
     <div class="form-group">
       <label for="pwd">Phone No:</label>
       <input type="text" class="form-control" id="phone" title="Usser Phone No" placeholder="Enter Phone No" name="phone" value="{{ $value->phone_no }}">
+    </div>
+
+    <div class="form-group">
+      <div class="col-md-4">
+      <label for="pwd">Address:</label>
+      <input type="text" class="form-control" id="address" title="Usser Phone No" placeholder="Enter Phone No" name="address" value="{{ $value->address }}" style="margin-left: -15px;">
+    </div>
+    <div class="col-md-4">
+      <label for="pwd">State:</label>
+      <input type="text" class="form-control" id="state" title="Usser Phone No" placeholder="Enter Phone No" name="state" value="{{ $value->state }}" style="margin-left: -15px;">
+    </div>
+    <div class="col-md-4">
+      <label for="pwd">City:</label>
+      <input type="text" class="form-control" id="city" title="Usser Phone No" placeholder="Enter Phone No" name="city" value="{{ $value->city }}" style="margin-left: -15px;">
+    </div>
     </div>
     <div class="form-group">
       <label for="pwd">Password*:</label>

@@ -25,7 +25,7 @@ class orderController extends Controller
     {
     	//$userId = $this->users->id;
     	$ORDER_ID = uniqid();
-		$TXN_AMOUNT = $request->price;
+		$TXN_AMOUNT = 20;
 		$TRANSCTION_ID = MD5(rand(0, 9999));
 		$data = $this->handlePaymentRequest( $TXN_AMOUNT, $ORDER_ID );
 		$paramList = $data['paramList'];

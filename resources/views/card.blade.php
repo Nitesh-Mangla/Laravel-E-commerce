@@ -141,7 +141,7 @@
                                         @foreach( $products as $info ) 
 
                                         <input type="hidden" name="id[]"  value="{{$info->id}}">
-                                        <input type="hidden" name="quantity" id="quantity{{$info->id}}" value="{{$info->qyt}}">
+                                        <input type="hidden" name="quantity[]" id="quantity{{$info->id}}" value="{{$info->qyt}}">
                                         <tr class="cart_item">
                                             <td class="product-remove">
                                                 <a title="Remove this item" class="remove" href="#" id="{{$info->id}}">×</a> 
@@ -150,7 +150,7 @@
                                             <td class="product-thumbnail">
                                                 <a href="single-product.html"><img width="145" height="145" alt="poster_1_up" class="shop_thumbnail" src="img/{{$info->image}}"></a>
                                             </td>
-
+                                        <input type="hidden" name="product[]" value="{{$info->product_name}}">
                                             <td class="product-name">
                                                 <a href="single-product.html">{{$info->product_name}}</a> 
                                             </td>
