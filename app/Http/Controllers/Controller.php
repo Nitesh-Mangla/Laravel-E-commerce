@@ -27,7 +27,9 @@ class Controller extends BaseController
 
      public function checkout( Request $request, userProfileDataService $profileData )
     {
+        Session::forget('cardData');
         Session::put('cardData', $request->all());
+        //dd(Session::get('cardData'));
     	return view('checkout', ['tprice' => checkoutAmount(), 'userProfile' =>  json_decode($profileData->getUserProfileDetails())]);
     }
 

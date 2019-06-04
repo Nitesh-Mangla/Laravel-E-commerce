@@ -26,6 +26,7 @@ class checkoutModel extends Controller
         $id            = $cardData['id'];
         $productName   = $cardData['product'];
         $quantity      = $cardData['quantity'];
+        $product_quantity      = $cardData['product_quantity'];
         $Totalprice         = $cardData['price'];
         $data = array( array() );
         //$i = 0;
@@ -35,9 +36,11 @@ class checkoutModel extends Controller
             $data[$i]['id'] = $id[$i];
             $data[$i]['product'] = $productName[$i];
             $data[$i]['quantity'] = $quantity[$i];
+            $data[$i]['product_quantity'] = $product_quantity[$i];
             $data[$i]['total'] = $Totalprice[$i];
-            $data[$i]['price'] = $Totalprice[$i]/$quantity[$i];
+            $data[$i]['price'] = $Totalprice[$i]/$product_quantity[$i];
        }
+       //Session::forget('cardData');
        
         return view('confirmOrder', ['details' => $request, 'phoneNo' => $phoneNo, 'cardData' => $data, 'tprice' => checkoutAmount()]);
     }

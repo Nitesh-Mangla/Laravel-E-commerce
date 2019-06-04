@@ -11,9 +11,6 @@ class orderPlacedService
 {
 	public function orderInPending( $request, $transactionNo, $orderNo )
 	{
-
-		
-		
 		for ($i = 0; $i < count($request['product_name']); $i++) { 
 			$product = DB::table('order_placeds')->where([ 'user_id' => Auth::id(), 'product_id' => $request['id'][$i], 'order_status' => 'pending' ])->get();
 			if( count($product) == 0 ){
@@ -30,9 +27,9 @@ class orderPlacedService
 			$orderPlaced->phoneNo = $request['phone'];
 			$orderPlaced->address = $request['address'];
 			$orderPlaced->save();
-		}
+			}
 		Session::forget('cardData');
-	}
+		}
 		
 	}
 
@@ -55,8 +52,7 @@ class orderPlacedService
 	public function updateOrderStatus( $productDetails, $status )
 	{
 			for ($i = 0; $i < count($productDetails) ; $i++) { 
-					$product = order_placeds::where([ 'user_id' => Auth::id(), 'product_id' => $productDetails[$i]->product_id, 'order_status' => 'pending' ])->update(['order_status' => $status]);	
-					
+					$product = order_placeds::where([ 'user_id' => Auth::id(), 'product_id' => $productDetails[$i]->product_id, 'order_status' => 'pending' ])->update(['order_status' => $status]);
 			}
 	}
 
@@ -64,7 +60,6 @@ class orderPlacedService
 	{
 			for ($i = 0; $i < count($productDetails) ; $i++) { 
 					$card = DB::table( 'card_details' )->where([ 'id' => $productDetails[$i]->product_id, 'email' => Auth::user()->email, 'status' => 0 ])->update(['status' => 1]);
-					
 			}
 	}
 }

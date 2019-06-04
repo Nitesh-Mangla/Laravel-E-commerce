@@ -64,12 +64,12 @@
                            
                             <input type="hidden" name="product_name[]" value="{{ $value['product'] }}">
                             <input type="hidden" name="price[]" value="{{ $value['total'] }}">
-                            <input type="hidden" name="quantity[]" value="{{ $value['quantity'] }}">
+                            <input type="hidden" name="quantity[]" value="{{ $value['product_quantity'] }}">
                             <!-- <input type="hidden" name="price[]" value="{{$tprice}}"> -->
                             <input type="hidden" name="id[]" value="{{ $value['id'] }}">
                         <tr>                           
                             <td class="col-md-9"><em></em>{{ $value['product'] }}</h4></td>
-                            <td class="col-md-1" style="text-align: center"> {{ $value['quantity'] }} </td>
+                            <td class="col-md-1" style="text-align: center"> {{ $value['product_quantity'] }} </td>
                             <td class="col-md-1 text-center">{{ $value['price'] }}</td>
                             <td class="col-md-1 text-center">{{ $value['total'] }}</td>
                         </tr>

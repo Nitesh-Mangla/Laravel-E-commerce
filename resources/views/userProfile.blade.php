@@ -29,7 +29,7 @@
                             <img src="profile_pic/{{$value->image}}" id="{{ $value->id }}" title="Profile Pic" class="profile" style="cursor:pointer"/>
                             <div class="file btn btn-lg btn-primary">
                                 Change Photo
-                                <input type="file" name="profile_pic" id="file" class="{{ $value->id }}"/>
+                                <input type="file" name=" " id="file" class="{{ $value->id }}"/>
                             </div>
                         </div>
                     </div>

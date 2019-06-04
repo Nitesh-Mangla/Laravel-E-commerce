@@ -163,7 +163,7 @@
                                             <td class="product-quantity">
                                                 <div class="quantity buttons_added">
                                                     <input type="button" class="minus" value="-" id="{{$info->id}}">
-                                                    <input type="number" size="4" class="input-text qty text" title="Qty" value="{{$info->quantity}}" min="0" step="1" id="qty{{$info->id}}">
+                                                    <input type="number" size="4" class="input-text qty text" title="Qty" name="product_quantity[]" value="{{$info->quantity}}" min="0" step="1" id="qty{{$info->id}}">
                                                     <input type="button" class="plus" value="+" id="{{$info->id}}">
                                                 </div>
                                             </td>
