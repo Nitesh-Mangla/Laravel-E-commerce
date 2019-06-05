@@ -62,7 +62,7 @@
                        <div class="or-seperator"><i>or</i></div>
         <p class="text-center">Login with your social media account</p>
         <div class="text-center social-btn">
-            <a href="{{ url('auth/facebook') }}" class="btn btn-primary"><i class="fa fa-facebook"></i>&nbsp; Facebook</a>
+            <a href="{{ url('/facebookLogin') }}" class="btn btn-primary"><i class="fa fa-facebook"></i>&nbsp; Facebook</a>
             <a href="#" class="btn btn-info"><i class="fa fa-twitter"></i>&nbsp; Twitter</a>
             <a href="{{ url('/redirect') }}" class="btn btn-danger"><i class="fa fa-google"></i>&nbsp; Google</a>
         </div>

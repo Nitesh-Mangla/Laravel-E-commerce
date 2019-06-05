@@ -37,7 +37,7 @@ class SocialAuthGoogleController extends Controller
                 $user->password = md5(rand(1,10000));	
                 $user->save();
                 Auth::loginUsingId($user->id);
-                DB::table('userprofile')->insert(array('user_id' => $user->id, 'image' => $googleUser->avatar));
+                DB::table('userprofiles')->insert(array('user_id' => $user->id, 'image' => $googleUser->avatar));
                 
             }
             return redirect()->to('/');

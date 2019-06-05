@@ -22,10 +22,12 @@
 	Route::GET('/card{id?}', 'Controller@card')->name('card');
 	Route::POST('/paytmpayment', 'orderController@placeOrder')->name('paytmpayment');
 	Route::POST('/paytmResponseCall', 'orderController@paytmResponseCallback')->name('paytmResponseCall');
+	Route::Get('/facebookLogin', 'facebookLoginController@redirect')->name('facebookLogin');
+	Route::Get('/facebookcallback', 'facebookLoginController@callback')->name('facebookCallback');
 
 
 Route::Group(['middleware' => 'userAuth'], function(){	
-	Route::get('home', 'HomeController@index')->name('home');		
+	Route::get('/home', 'HomeController@index')->name('home');		
 	Route::match(['GET', 'POST'], '/checkout', 'Controller@checkout')->name('checkout');	
 	Route::GET('/addCard', 'AddCartCobtroller@addToCard')->name('addcard');
 	Route::GET('/updateProductQuantities', 'AddCartCobtroller@updateProductQuantities')->name('updateProductQuantities');

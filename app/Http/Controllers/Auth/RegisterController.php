@@ -49,28 +49,22 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
+    protected function validator(array $request)
     {
-        // return Validator::make($data, [
-        //     'fname' => 'required|string|max:255',
-        //     'lname' => 'required|string|max:50',
-        //     'email' => 'required|string|email|max:255|unique:users',
-        //     'Password' => 'required|string|min:6|confirmed',
-            
-
-        // ]);
-        return Validator::make($data,[
-            // 'fname'    => 'required|string',
-            // 'lname'    => 'required|string',
-            // 'email'    => 'required|email|string|unique:users',
-            // 'Password' => 'required|max:15|min:6|confirmed',
-            // //'profile'  => 'required|image|mimes:jpg,JPEG,png,PNG,GIF|max:2048',
-            // 'address'  => 'required|string|',
-            // 'city'     => 'required|string',
-            // 'state'    => 'required|string',
-            // 'phone'    => 'required|numeric|min:12|max:15',
-            // 'pin'      => 'required|numeric',
-        ]);
+       
+        $validator =  Validator::make($request, [
+            'fname'    => 'required|string',
+            'lname'    => 'required|string',
+            'email'    => 'required|email|string|unique:users',
+            'Password' => 'required|max:15|min:6|confirmed',
+            'address'  => 'required|string|',
+            'city'     => 'required|string',
+            'state'    => 'required|string',
+            'phone'    => 'required|numeric|min:12|max:15',
+            'pin'      => 'required|numeric',
+        ]); 
+           
+            return $validator;
     }
 
     /**

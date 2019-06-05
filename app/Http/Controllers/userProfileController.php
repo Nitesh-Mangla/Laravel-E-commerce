@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use DB;
 use Session;
 use Validation;
+use Illuminate\Support\Facades\Hash;
 
 class userProfileController extends Controller
 {
@@ -23,7 +24,7 @@ class userProfileController extends Controller
       
         if( !empty($data[4]['value']) )
         {
-            DB::table('userprofiles as up')->join('users as u', 'up.user_id', '=', 'u.id')->where('up.id','=', $data[1]['value'])->update(['up.phone_no' => $data[2]['value'], 'u.password' => md5($data[6]['value']), 'address' => $data[3]['value'], 'city' => $data[5]['value'], 'state' => $data[4]['value']] );
+            DB::table('userprofiles as up')->join('users as u', 'up.user_id', '=', 'u.id')->where('up.id','=', $data[1]['value'])->update(['up.phone_no' => $data[2]['value'], 'u.password' => Hash::Make($data[6]['value']), 'address' => $data[3]['value'], 'city' => $data[5]['value'], 'state' => $data[4]['value']] );
         }else{
             DB::table('userprofile')->where('id','=', $data[1]['value'])->update(['phone_no' => $data[2]['value'], 'address' => $data[3]['value'], 'city' => $data[5]['value'], 'state' => $data[4]['value']] );   
         }    	

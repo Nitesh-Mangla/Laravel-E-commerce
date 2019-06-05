@@ -1,9 +1,21 @@
-
+@push('css')
+<style type="text/css">
+    .row.back-btn {
+    align-items: right;
+    float: right;
+    margin: -39px 1pc;
+    color: white;
+}
+</style>
+@endpush
 @extends('layouts.app')
 
 @section('content')
 <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="{{asset('css/registration.css')}}">
+<div class="row back-btn">
+    <a  href="{{ url('/')}}"class="btn btn-primary">Back</a>
+</div>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
@@ -18,20 +30,20 @@
             <div class="col-lg-12 well">
             <div class="row">
                 <form>
-                    <div class="col-sm-12">
+                    <div class="col-sm-12"> 
                         <div class="row">
                             <div class="col-sm-6 form-group">
                                 <label>First Name</label>
-                                <input type="text" placeholder="Enter First Name Here.." class="form-control{{$errors->has('fname')?'is-invalid':''}}" name="fname" value="{{ old('fname') }}" autofocus="">
-                                @if ($errors->has('fname'))
+                                <input type="text" placeholder="Enter First Name Here.." class="form-control {{ $errors->has('fname')?'is-invalid':''}}" name="fname" value="{{ old('fname') }}" autofocus="">
+                                <!-- @if ($errors->has('fname'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('fname') }}</strong>
                                     </span>
-                                @endif
+                                @endif -->
                             </div>
                             <div class="col-sm-6 form-group">
                                 <label>Last Name</label>
-                                <input type="text" placeholder="Enter Last Name Here.." class="form-control{{ $errors->has('lname')?'is-invalid':'' }}" name="lname" value="{{old('lname')}}">
+                                <input type="text" placeholder="Enter Last Name Here.." class="form-control {{ $errors->has('lname')?'is-invalid':'' }}" name="lname" value="{{old('lname')}}">
                                 @if ($errors->has('lname'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('lname') }}</strong>
@@ -41,7 +53,7 @@
                         </div>
                         <div class="form-group row">
                             <label>Email Address</label>
-                            <input type="email" placeholder="Enter Email Address Here.." class="form-control{{ $errors->has('email')?'is-invalid':'' }}"name="email" value="{{old('email')}}">
+                            <input type="email" placeholder="Enter Email Address Here.." class="form-control {{ $errors->has('email')?'is-invalid':'' }}"name="email" value="{{old('email')}}">
                             @if($errors->has('email'))
                             <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('email') }}</strong>
@@ -50,7 +62,7 @@
                         </div>  
                          <div class="form-group">
                             <label>Password</label>
-                            <input type="Password" placeholder="Enter Password Here.." class="form-control{{ $errors->has('Password')?'is-invalid':'' }}"name="Password" value="{{old('Password')}}">
+                            <input type="Password" placeholder="Enter Password Here.." class="form-control {{ $errors->has('Password')?'is-invalid':'' }}"name="Password" value="{{old('Password')}}">
                             @if($errors->has('Password'))
                             <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('Password') }}</strong>
@@ -59,7 +71,7 @@
                         </div>   
                         <div class="form-group">
                             <label>Confirm Password</label>
-                            <input type="Password" placeholder="Enter Confirm Password Here.." class="form-control{{ $errors->has('confirmPassword')?'is-invalid':'' }}"name="confirmPassword" value="{{old('confirmPassword')}}">
+                            <input type="Password" placeholder="Enter Confirm Password Here.." class="form-control {{ $errors->has('confirmPassword')?'is-invalid':'' }}"name="confirmPassword" value="{{old('confirmPassword')}}">
                             @if($errors->has('confirmPassword'))
                             <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('confirmPassword') }}</strong>
@@ -68,7 +80,7 @@
                         </div> 
                         <div class="form-group">
                             <label>Address</label>
-                            <input type="text" placeholder="Enter Address Here.." class="form-control{{ $errors->has('address')?'is-invalid':'' }}"name="address" value="{{old('address')}}">
+                            <input type="text" placeholder="Enter Address Here.." class="form-control {{ $errors->has('address')?'is-invalid':'' }}"name="address" value="{{old('address')}}">
                             @if($errors->has('address'))
                             <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('address') }}</strong>
@@ -78,7 +90,7 @@
                           <div class="row">
                             <div class="col-sm-6 form-group">
                                 <label>City</label>
-                                <input type="text" placeholder="Enter City Name Here.." class="form-control{{ $errors->has('city')?'is-invalid':'' }}" name="city" value="{{ old('city') }}">
+                                <input type="text" placeholder="Enter City Name Here.." class="form-control {{ $errors->has('city')?'is-invalid':'' }}" name="city" value="{{ old('city') }}">
                                 @if($errors->has('city'))
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('city') }}</strong>
@@ -87,7 +99,7 @@
                             </div>  
                             <div class="col-sm-6 form-group">
                                 <label>State</label>
-                                <input type="text" placeholder="Select Country Name Here.." class="form-control{{ $errors->has('state')?'is-invalid':'' }}" name="state" value="{{ old('state') }}">
+                                <input type="text" placeholder="Select Country Name Here.." class="form-control {{ $errors->has('state')?'is-invalid':'' }}" name="state" value="{{ old('state') }}">
                                  @if($errors->has('state'))
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('state') }}</strong>
@@ -96,7 +108,7 @@
                             </div> 
                          <div class=" col-sm-6 form-group">
                             <label>Phone No</label>
-                            <input type="number" placeholder="Enter Phone no Here.." class="form-control{{ $errors->has('phone')?'is-invalid':'' }}"name="phone" value="{{ old('phone') }}">
+                            <input type="number" placeholder="Enter Phone no Here.." class="form-control {{ $errors->has('phone')?'is-invalid':'' }}"name="phone" value="{{ old('phone') }}">
                             @if($errors->has('phone'))
                             <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('phone') }}</strong>
@@ -105,7 +117,7 @@
                         </div>                      
                           <div class=" col-sm-6 form-group">
                             <label>Pin No</label>
-                            <input type="number" placeholder="Enter Phone no Here.." class="form-control{{ $errors->has('pin')?'is-invalid':'' }}"name="pin" value="{{old('pin')}}">
+                            <input type="number" placeholder="Enter Phone no Here.." class="form-control {{ $errors->has('pin')?'is-invalid':'' }}"name="pin" value="{{old('pin')}}">
                             @if($errors->has('pin'))
                             <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('pin') }}</strong>

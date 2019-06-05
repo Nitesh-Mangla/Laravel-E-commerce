@@ -9,7 +9,7 @@ class SocialFacebookAccountService
 {
     public function createOrGetUser(ProviderUser $providerUser)
     {
-        $account = SocialFacebookAccount::whereProvider('facebook')
+        $account = Users::whereProvider('facebook')
             ->whereProviderUserId($providerUser->getId())
             ->first();
 
@@ -17,10 +17,8 @@ class SocialFacebookAccountService
             return $account->user;
         } else {
 
-            $account = new SocialFacebookAccount([
-                'provider_user_id' => $providerUser->getId(),
-                'provider' => 'facebook'
-            ]);
+            $account = new Users([ 'provider_user_id' =>
+            $providerUser->getId(), 'provider' => 'facebook' ]);
 
             $user = User::whereEmail($providerUser->getEmail())->first();
 
