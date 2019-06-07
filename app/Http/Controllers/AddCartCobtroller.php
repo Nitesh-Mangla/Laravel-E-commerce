@@ -24,8 +24,8 @@ class AddCartCobtroller extends Controller
                        
             $product =json_decode($product);
 
-            $exists = DB::table('card details')->select('status','quantity','price')
-                            ->where(['email' => Session::get('username'), 'product id' => $request->input('id') ])->get();
+            $exists = DB::table('card_details')->select('status','quantity','price')
+                            ->where(['email' => Session::get('username'), 'product_id' => $request->input('id') ])->get();
 
             
              if( count($exists) > 0)
@@ -33,28 +33,28 @@ class AddCartCobtroller extends Controller
                 if( $exists[0]->status == '1')
                 {   
 
-                    DB::table('card details')->where(['product id' => $request->input('id'), 'email' => Session::get( 'username')])->update(['status' => 0, 'quantity' => 1, 'price' => $product[0]->price]);
+                    DB::table('card_details')->where(['product_id' => $request->input('id'), 'email' => Session::get( 'username')])->update(['status' => 0, 'quantity' => 1, 'price' => $product[0]->price]);
                 }else{
                     
                     $qyt = $exists[0]->quantity + 1;
                     $price = $exists[0]->price + $product[0]->price;
 
-                    DB::table('card details')->where(['product id' => $request->input('id'), 'email' => Session::get( 'username')])->update(['status' => 0, 'quantity' => $qyt, 'price' => $price]);
+                    DB::table('card_details')->where(['product_id' => $request->input('id'), 'email' => Session::get( 'username')])->update(['status' => 0, 'quantity' => $qyt, 'price' => $price]);
                 }
 
              }  else{
 
-                    $insert = DB::table('card details')->insert(['email' => Session::get('username'), 'quantity' => 1,'price' => $product[0]->price, 'product id' => $request->input('id')]); 
+                    $insert = DB::table('card_details')->insert(['email' => Session::get('username'), 'quantity' => 1,'price' => $product[0]->price, 'product_id' => $request->input('id')]); 
              }             
            
              
              
     	}
     	   
-          $card  = DB::table('card details')->leftjoin('product details', 
-                                        'card details.product id', '=', 'product details.id')
-                                        ->select(DB::raw('sum(`card details`.price)  as total'),'card details.*', 'product details.id','product details.image','product details.product_name','product details.quantity as qyt')
-                                        ->where('card details.email', Session::get('username') )
+          $card  = DB::table('card_details')->leftjoin('product details', 
+                                        'card_details.product_id', '=', 'product details.id')
+                                        ->select(DB::raw('sum(`card_details`.price)  as total'),'card_details.*', 'product details.id','product details.image','product details.product_name','product details.quantity as qyt')
+                                        ->where('card_details.email', Session::get('username') )
                                         ->where('status', 0)
                                         ->GROUPBY('product details.id')
                                         ->orderBy('product details.id','DESC')
@@ -75,12 +75,12 @@ class AddCartCobtroller extends Controller
         //     $query->select('product id')->from('card details')->where('id', id);
         // })->get();
 
-        $cardId = DB::table('card details')->select('id')->where(['email' => Session::get('username'),
-                                    'product id' => $request->input('id'),])
+        $cardId = DB::table('card_details')->select('id')->where(['email' => Session::get('username'),
+                                    'product_id' => $request->input('id'),])
                                     ->get();  
             
                 
-        $status = DB::table('card details')-> where('id' , $cardId[0]->id)->
+        $status = DB::table('card_details')-> where('id' , $cardId[0]->id)->
                 update(['quantity'=> $request->input('qyt'), 'price' => $request->input('price')]);
 
         if( $status )
@@ -95,11 +95,11 @@ class AddCartCobtroller extends Controller
     public function deleteCardProduct(Request $request)
     {
 
-         $cardId = DB::table('card details')->select('id')->where(['email' => Session::get('username'),
-                                    'product id' => $request->input('id')])
+         $cardId = DB::table('card_details')->select('id')->where(['email' => Session::get('username'),
+                                    'product_id' => $request->input('id')])
                                     ->get();  
 
-        $status = DB::table('card details')->where('id', $cardId[0]->id)
+        $status = DB::table('card_details')->where('id', $cardId[0]->id)
                             ->update(['status' => 1]);
         if( $status ){
             echo "Product is successfully Deleted";

@@ -19,6 +19,7 @@ class UserProfile extends Migration
             $table->string('image')->default('profile.jpg');
             $table->integer('phone_no');
             $table->integer('status')->default(1);
+            $table->string('address');
         });
     }
 

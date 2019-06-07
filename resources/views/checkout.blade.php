@@ -42,7 +42,7 @@
                         @endauth
                         <li><a href="#">Category</a></li>
                         <li><a href="#">Others</a></li>
-                        <li><a href="#">Contact</a></li>
+                        <li><a href="{{url('contact')}}">Contact</a></li>
                     </ul>
                 </div>  
         </div>
@@ -128,8 +128,8 @@
                                 <div class="clear"></div>
                             </form>
 
-                            <form enctype="multipart/form-data" action="#" class="checkout" method="post" name="checkout">
-
+                            <form enctype="multipart/form-data" action="{{url('orderConfirmation')}}" class="checkout" method="post" name="checkout">
+                                @csrf
                                 <div id="customer_details" class="col2-set">
                                 
                                     <div class="col-2">
@@ -142,7 +142,7 @@
                                                 <p id="shipping_country_field" class="form-row form-row-wide address-field update_totals_on_change validate-required woocommerce-validated">
                                                     <label class="" for="shipping_country">Country <abbr title="required" class="required">*</abbr>
                                                     </label>
-                                                    <select class="country_to_state country_select" id="shipping_country" name="shipping_country">
+                                                    <select class="country_to_state country_select" id="shipping_country" name="country">
                                                         <option value="">Select a country…</option>
                                                         <option value="AX">Åland Islands</option>
                                                         <option value="AF">Afghanistan</option>
@@ -392,58 +392,40 @@
                                                 </p>
 
                                                 <p id="shipping_first_name_field" class="form-row form-row-first validate-required">
-                                                    <input type="hidden" id="ORDER_ID" tabindex="1" maxlength="20" size="20"
-                                                name="ORDER_ID" autocomplete="off"
-                                                value="<?php echo  "ORDS" . rand(10000,99999999)?>">
-                                                <input type="hidden" id="CUST_ID" tabindex="2" maxlength="12" size="12" name="CUST_ID" autocomplete="off" value="CUST001"></td>
-                                                <input type="hidden" id="INDUSTRY_TYPE_ID" tabindex="4" maxlength="12" size="12" name="INDUSTRY_TYPE_ID" autocomplete="off" value="Retail">
-                                                <input type="hidden" id="CHANNEL_ID" tabindex="4" maxlength="12"
-                                    size="12" name="CHANNEL_ID" autocomplete="off" value="WEB">
-
-
-
-
-
                                                     <label class="" for="shipping_first_name">First Name <abbr title="required" class="required">*</abbr>
                                                     </label>
-                                                    <input type="text" value="" placeholder="" id="shipping_first_name" name="shipping_first_name" class="input-text ">
+                                                    <input type="text" value="{{ Auth::user()->name }}" placeholder="" id="shipping_first_name" name="name" class="input-text " required>
                                                 </p>
 
-                                                <p id="shipping_last_name_field" class="form-row form-row-last validate-required">
-                                                    <label class="" for="shipping_last_name">Last Name <abbr title="required" class="required">*</abbr>
-                                                    </label>
-                                                    <input type="text" value="" placeholder="" id="shipping_last_name" name="shipping_last_name" class="input-text ">
-                                                </p>
+                                                
                                                 <div class="clear"></div>
 
                                                 
-
+                                                
                                                 <p id="shipping_address_1_field" class="form-row form-row-wide address-field validate-required">
                                                     <label class="" for="shipping_address_1">Address <abbr title="required" class="required">*</abbr>
                                                     </label>
-                                                    <input type="text" value="" placeholder="Street address" id="shipping_address_1" name="shipping_address_1" class="input-text ">
+                                                    <input type="text" value="{{ $userProfile->address }}" placeholder="Street address" id="shipping_address_1" name="address" class="input-text " required>
                                                 </p>
 
-                                                <p id="shipping_address_2_field" class="form-row form-row-wide address-field">
-                                                    <input type="text" value="" placeholder="Apartment, suite, unit etc. (optional)" id="shipping_address_2" name="shipping_address_2" class="input-text ">
-                                                </p>
+                                                
 
                                                 <p id="shipping_city_field" class="form-row form-row-wide address-field validate-required" data-o_class="form-row form-row-wide address-field validate-required">
                                                     <label class="" for="shipping_city">Town / City <abbr title="required" class="required">*</abbr>
                                                     </label>
-                                                    <input type="text" value="" placeholder="Town / City" id="shipping_city" name="shipping_city" class="input-text ">
+                                                    <input type="text" value="{{ $userProfile->city }}" placeholder="Town / City" id="shipping_city" name="city" class="input-text " required>
                                                 </p>
 
                                                 <p id="shipping_state_field" class="form-row form-row-first address-field validate-state" data-o_class="form-row form-row-first address-field validate-state">
-                                                    <label class="" for="shipping_state">County</label>
-                                                    <input type="text" id="shipping_state" name="shipping_state" placeholder="State / County" value="" class="input-text ">
+                                                    <label class="" for="shipping_state">State</label>
+                                                    <input type="text" id="shipping_state" name="state" placeholder="State / County" value="{{ $userProfile->state }}" class="input-text " required>
                                                 </p>
                                                 <p id="shipping_postcode_field" class="form-row form-row-last address-field validate-required validate-postcode" data-o_class="form-row form-row-last address-field validate-required validate-postcode">
                                                     <label class="" for="shipping_postcode">Postcode <abbr title="required" class="required">*</abbr>
                                                     </label>
-                                                    <input type="text" value="" placeholder="Postcode / Zip" id="shipping_postcode" name="shipping_postcode" class="input-text ">
+                                                    <input type="text" value="" placeholder="Postcode / Zip" id="postcode" name="postcode" class="input-text " required>
                                                 </p>
-
+                                                
                                                 <div class="clear"></div>
 
 
@@ -455,13 +437,13 @@
 
                                             <p id="order_comments_field" class="form-row notes">
                                                 <label class="" for="order_comments">Order Notes</label>
-                                                <textarea cols="5" rows="2" placeholder="Notes about your order, e.g. special notes for delivery." id="order_comments" class="input-text " name="order_comments"></textarea>
+                                                <textarea cols="5" rows="2" placeholder="Notes about your order, e.g. special notes for delivery." id="order_comments" class="input-text " name="notes"></textarea>
                                             </p>
 
                                           <p id="shipping_last_name_field" class="form-row form-row-last validate-required">
                                                     <label class="" for="shipping_last_name">Total Amount <abbr title="required" class="required">*</abbr>
                                                     </label>
-                                                    <input type="text"  placeholder="" id="shipping_last_name" name="shipping_last_name" class="input-text payamount" value="<?php echo $tprice?>">
+                                                    <input type="text"  placeholder="" id="shipping_last_name" name="price" class="input-text payamount" value="<?php echo $tprice?>">
                                                 </p> 
 
 

@@ -28,6 +28,16 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function userprofile()
+    {
+        return $this->hasOne('App\userprofile');
+    }
+
+    public function card_details()
+    {
+        return $this->hasMany('App\card_details','email', 'email');
+    }
+
     public function addNew($input)
     {
         $check = static::where('facebook_id',$input['facebook_id'])->first();

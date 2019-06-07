@@ -53,7 +53,7 @@
                         @endauth
                         <li><a href="#">Category</a></li>
                         <li><a href="#">Others</a></li>
-                        <li><a href="#">Contact</a></li>
+                        <li><a href="{{url('contact')}}">Contact</a></li>
                     </ul>
                 </div>  
             </div>
@@ -141,7 +141,7 @@
                                         @foreach( $products as $info ) 
 
                                         <input type="hidden" name="id[]"  value="{{$info->id}}">
-                                        <input type="hidden" name="quantity" id="quantity{{$info->id}}" value="{{$info->qyt}}">
+                                        <input type="hidden" name="quantity[]" id="quantity{{$info->id}}" value="{{$info->qyt}}">
                                         <tr class="cart_item">
                                             <td class="product-remove">
                                                 <a title="Remove this item" class="remove" href="#" id="{{$info->id}}">×</a> 
@@ -150,7 +150,7 @@
                                             <td class="product-thumbnail">
                                                 <a href="single-product.html"><img width="145" height="145" alt="poster_1_up" class="shop_thumbnail" src="img/{{$info->image}}"></a>
                                             </td>
-
+                                        <input type="hidden" name="product[]" value="{{$info->product_name}}">
                                             <td class="product-name">
                                                 <a href="single-product.html">{{$info->product_name}}</a> 
                                             </td>
@@ -163,7 +163,7 @@
                                             <td class="product-quantity">
                                                 <div class="quantity buttons_added">
                                                     <input type="button" class="minus" value="-" id="{{$info->id}}">
-                                                    <input type="number" size="4" class="input-text qty text" title="Qty" value="{{$info->quantity}}" min="0" step="1" id="qty{{$info->id}}">
+                                                    <input type="number" size="4" class="input-text qty text" title="Qty" name="product_quantity[]" value="{{$info->quantity}}" min="0" step="1" id="qty{{$info->id}}">
                                                     <input type="button" class="plus" value="+" id="{{$info->id}}">
                                                 </div>
                                             </td>

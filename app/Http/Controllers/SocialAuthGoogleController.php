@@ -36,9 +36,23 @@ class SocialAuthGoogleController extends Controller
                 $user->google_id = $googleUser->id;
                 $user->password = md5(rand(1,10000));	
                 $user->save();
+
                 Auth::loginUsingId($user->id);
-                DB::table('userprofile')->insert(array('user_id' => $user->id, 'image' => $googleUser->avatar));
-                
+                DB::table('userprofiles')->insert(array('user_id' => $user->id, 'image' => $googleUser->avatar));
+
+                $emailInfo = array(
+                'email' => $googleUser->email,
+                'sender_name' =>$googleUser->name,
+                'body'   => 'Click on this to verify your account <a href="#" atl="">Click Here...</a>',
+                'subject' => 'Verify Your Account'
+
+            );
+
+               if(SendMail( $emailInfo )){                  // verification mail
+                    return redirect()->to('/');
+                }else{
+                    return redirect()->to('/login');
+                }
             }
             return redirect()->to('/');
         } 

@@ -44,7 +44,7 @@
                         @endauth
                         <li><a href="#">Category</a></li>
                         <li><a href="#">Others</a></li>
-                        <li><a href="#">Contact</a></li>
+                        <li><a href="{{url('contact')}}">Contact</a></li>
                     </ul>
                 </div>  
             </div>

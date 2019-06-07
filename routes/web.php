@@ -11,16 +11,9 @@
 |
 */
 
-	Route::GET('/payamount' ,function(){
-		return view('test');
-	});
-
-	Route::GET('/orderConfirmation' ,function(){
-		return view('confirmOrder');
-	});
-
 	Route::GET('/','product_controller@fetchProducts');
 	Auth::routes(['verify' => true]);
+	// Route::GET('/email', 'emailcontroller')
 	Route::get('auth/facebook', 'Auth\LoginController@redirectToFacebook');
 	Route::get('auth/facebook/callback', 'Auth\LoginController@handleFacebookCallback');
 	Route::get('/redirect', 'SocialAuthGoogleController@redirect');
@@ -28,12 +21,17 @@
 	Route::GET('/shop', 'Controller@shop')->name('shop');
 	Route::GET('/singleproduct', 'Controller@singleProduct')->name('singleproduct');
 	Route::GET('/card{id?}', 'Controller@card')->name('card');
-	Route::POST('/paytmResponse', 'orderController@placeOrder')->name('paytmResponse');
+	Route::POST('/paytmpayment', 'orderController@placeOrder')->name('paytmpayment');
 	Route::POST('/paytmResponseCall', 'orderController@paytmResponseCallback')->name('paytmResponseCall');
-
+	Route::Get('/facebookLogin', 'facebookLoginController@redirect')->name('facebookLogin');
+	Route::Get('/facebookcallback', 'facebookLoginController@callback')->name('facebookCallback');
+	Route::GET( '/contact', [
+		'uses' => 'controller@contactForm',
+		 'as'  => 'contact'
+	] );
 
 Route::Group(['middleware' => 'userAuth'], function(){	
-	Route::get('home', 'HomeController@index')->name('home');		
+	Route::get('/home', 'HomeController@index')->name('home');		
 	Route::match(['GET', 'POST'], '/checkout', 'Controller@checkout')->name('checkout');	
 	Route::GET('/addCard', 'AddCartCobtroller@addToCard')->name('addcard');
 	Route::GET('/updateProductQuantities', 'AddCartCobtroller@updateProductQuantities')->name('updateProductQuantities');
@@ -42,6 +40,7 @@ Route::Group(['middleware' => 'userAuth'], function(){
 	Route::GET('/profileData','userProfileController@userProfileData')->name('userProfileData');
 	Route::GET('/editProfile', 'userProfileController@editUserProfile')->name('editUserProfile');
 	Route::POST('/changeUserProfile', 'userProfileController@changeUserProfile')->name('changeUserProfile');
+	Route::POST('/orderConfirmation', 'checkoutModel@checkPageDirect')->name('orderConfirmation');
 });
 
 

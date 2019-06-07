@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\paytmKit\configPaytm;
+use App\Services\orderPlacedService;
 use App\User;  
+use Redirect;
 
 class orderController extends Controller
 {
@@ -12,9 +14,10 @@ class orderController extends Controller
 	protected $configPaytm;
 	protected $endecPaytm;
 	protected $users;
-
-	public function __construct()
+	protected $orderPlaced;
+	public function __construct( orderPlacedService $orderPlaced )
 	{
+		$this->orderPlaced = $orderPlaced;
 		$this->configPaytm = new configPaytm();	
 		$this->configPaytm->config();
     	$this->endec_paytm();			
@@ -25,9 +28,10 @@ class orderController extends Controller
     {
     	//$userId = $this->users->id;
     	$ORDER_ID = uniqid();
-		$TXN_AMOUNT = $request->price;
+		$TXN_AMOUNT = $request->input('total');
 		$TRANSCTION_ID = MD5(rand(0, 9999));
 		$data = $this->handlePaymentRequest( $TXN_AMOUNT, $ORDER_ID );
+		$this->orderPlaced ->orderInPending( $request->all(), $TRANSCTION_ID, $ORDER_ID );
 		$paramList = $data['paramList'];
 		$checkSum  = $data['checkSum'];
 
@@ -56,23 +60,28 @@ class orderController extends Controller
     public function paytmResponseCallback( Request $request )
     {
     	//dd($request);
+    	
     	$paytmChecksum = "";
 		$paramList = array();
 		$isValidChecksum = "FALSE";
 		$paytmChecksum = isset($request['CHECKSUMHASH']) ? $request['CHECKSUMHASH'] : ""; //Sent by Paytm pg
 		$isValidChecksum = verifychecksum_e($paramList, PAYTM_MERCHANT_KEY, $paytmChecksum);
-		if($isValidChecksum == "TRUE") {
-			echo "<b>Checksum matched and following are the transaction details:</b>" . "<br/>";
+		// if($isValidChecksum == "TRUE") {
+			// echo "<b>Checksum matched and following are the transaction details:</b>" . "<br/>";
 			if ($request['STATUS'] == "TXN_SUCCESS") {
-				echo "<b>Transaction status is success</b>" . "<br/>";
+				$this->orderPlaced->orderPlaceChangeStatus( 'success' );
+				Session::flash('Success', 'your has been placed Successfully');
+				// return redirect()->route('');
 			}
 			else {
-				echo "<b>Transaction status is failure</b>" . "<br/>";
+				$this->orderPlaced->orderPlaceChangeStatus( 'failed' );
+				Session::flash('Success', 'your is\'t placed Successfully');
 			}
-		}
-		else {
-			echo "<b>Checksum mismatched.</b>";			
-		}
+		// }
+		// else {
+		// 	$this->orderPlaced->orderPlaceChangeStatus( 'failed' );
+		// 	echo "<b>Checksum mismatched.</b>";			
+		// }
     }
 
     public function endec_paytm()

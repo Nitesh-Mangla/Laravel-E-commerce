@@ -29,8 +29,6 @@ class LoginController extends Controller
     {
         return Socialite::driver('facebook')->redirect();
     }
-
-
     
     public function handleFacebookCallback()
     {

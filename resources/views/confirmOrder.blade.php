@@ -19,25 +19,30 @@
     <div class="row">
         <div class="well">
             <div class="row">
+                <form action="{{ url('/paytmpayment') }}" method="post" name="payment">
+                    @csrf
                 <div class="col-xs-6 col-sm-6 col-md-6">
                     <address>
-                        <strong>Elf Cafe</strong>
+                        <input type="hidden" name="address" value="{{$details['address']}} {{$details['city']}} {{ $details['state'] }} {{ $details['postcode'] }}">
+                        <strong>{{$details['address']}}</strong>
                         <br>
-                        2135 Sunset Blvd
+                        {{Ucfirst($details['city'])}}
                         <br>
-                        Los Angeles, CA 90026
+                        {{Ucfirst($details['state'])}} {{$details['postcode']}}
                         <br>
-                        <abbr title="Phone">P:</abbr> (213) 484-6829
+                        <input type="hidden" name="phone" value="{{ $phoneNo }}">
+                        <abbr title="Phone">P:</abbr> {{ $phoneNo }}
                     </address>
                 </div>
-                <div class="col-xs-6 col-sm-6 col-md-6 text-right">
+               <!--  <div class="col-xs-6 col-sm-6 col-md-6 text-right">
                     <p>
                         <em>Date: 1st November, 2013</em>
                     </p>
                     <p>
+                        <input type="hidden" name="recept_no    " value="">
                         <em>Receipt #: 34522677W</em>
                     </p>
-                </div>
+                </div> -->
             </div>
             <div class="row">
                 <div class="text-center">
@@ -48,59 +53,38 @@
                     <thead>
                         <tr>
                             <th>Product</th>
-                            <th>#</th>
+                            <th>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspQuantity</th>
                             <th class="text-center">Price</th>
                             <th class="text-center">Total</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td class="col-md-9"><em>Baked Rodopa Sheep Feta</em></h4></td>
-                            <td class="col-md-1" style="text-align: center"> 2 </td>
-                            <td class="col-md-1 text-center">$13</td>
-                            <td class="col-md-1 text-center">$26</td>
+                        @if( isset( $cardData ) )
+                        @foreach( $cardData as $key => $value)
+                           
+                            <input type="hidden" name="product_name[]" value="{{ $value['product'] }}">
+                            <input type="hidden" name="price[]" value="{{ $value['total'] }}">
+                            <input type="hidden" name="quantity[]" value="{{ $value['product_quantity'] }}">
+                            <!-- <input type="hidden" name="price[]" value="{{$tprice}}"> -->
+                            <input type="hidden" name="id[]" value="{{ $value['id'] }}">
+                        <tr>                           
+                            <td class="col-md-9"><em></em>{{ $value['product'] }}</h4></td>
+                            <td class="col-md-1" style="text-align: center"> {{ $value['product_quantity'] }} </td>
+                            <td class="col-md-1 text-center">{{ $value['price'] }}</td>
+                            <td class="col-md-1 text-center">{{ $value['total'] }}</td>
                         </tr>
-                        <tr>
-                            <td class="col-md-9"><em>Lebanese Cabbage Salad</em></h4></td>
-                            <td class="col-md-1" style="text-align: center"> 1 </td>
-                            <td class="col-md-1 text-center">$8</td>
-                            <td class="col-md-1 text-center">$8</td>
-                        </tr>
-                        <tr>
-                            <td class="col-md-9"><em>Baked Tart with Thyme and Garlic</em></h4></td>
-                            <td class="col-md-1" style="text-align: center"> 3 </td>
-                            <td class="col-md-1 text-center">$16</td>
-                            <td class="col-md-1 text-center">$48</td>
-                        </tr>
-                        <tr>
-                            <td>   </td>
-                            <td>   </td>
-                            <td class="text-right">
-                            <p>
-                                <strong>Subtotal: </strong>
-                            </p>
-                            <p>
-                                <strong>Tax: </strong>
-                            </p></td>
-                            <td class="text-center">
-                            <p>
-                                <strong>$6.94</strong>
-                            </p>
-                            <p>
-                                <strong>$6.94</strong>
-                            </p></td>
-                        </tr>
+                       @endforeach
+                       @endif
                         <tr>
                             <td>   </td>
                             <td>   </td>
                             <td class="text-right"><h4><strong>Total: </strong></h4></td>
-                            <td class="text-center text-danger"><h4><strong>$31.53</strong></h4></td>
+                            <input type="hidden" name="total" value="{{$tprice}}">
+                            <td class="text-center text-danger"><h4><strong>{{ $tprice }}</strong></h4></td>
                         </tr>
                         <tr>
                         	<td><div id="paypal-button-container"></div> </td>
-                        	<td></td>
-                        	<td></td>
-                        	<td></td>
+                        	<td style="width:20%"><a href="#" alt="paytm payment" class="paytm_payment"><img src="{{asset('img/paytm_logo.png')}}" ></a></td>
                         </tr>
                     </tbody>
                 </table>

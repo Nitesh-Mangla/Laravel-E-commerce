@@ -40,4 +40,11 @@ return [
         'redirect' => 'https://localhost:8080/online_shopping/public/callback'
     ],
 
+    
+    'facebook' => [
+        'client_id' => '646582132454241',
+        'client_secret' => 'fa19b86f6266032e4f3cff96e8928d2c',
+        'redirect' => 'https://localhost:8080/online_shopping/public/facebookcallback'    
+    ],
+
 ];

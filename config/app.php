@@ -146,7 +146,9 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-
+        App\Providers\userprofileModel::class,
+        App\Providers\orderPlaced::class,
+        Ixudra\Curl\CurlServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -161,6 +163,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
+
 
     ],
 
@@ -211,7 +214,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'facebookLogin' => App\Helper\facebook_login::class,
-        'Socialite' => Laravel\Socialite\Facades\Socialite::class
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'Curl' => Ixudra\Curl\Facades\Curl::class,
 
     ],
 

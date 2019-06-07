@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateOrderModelsTable extends Migration
+class Changeorderplace extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateOrderModelsTable extends Migration
      */
     public function up()
     {
-        // Schema::create('order_models', function (Blueprint $table) {
-        //     $table->increments('id');
-        //     $table->integer('user_id');
-        //     $table->string();
-        //     $table->timestamps();
-        // });
+        Schema::table( 'order_placeds', function( BluePrint $table){
+            $table->string('address');
+            $table->integer('phoneNo');
+        } );
     }
 
     /**
@@ -28,6 +26,6 @@ class CreateOrderModelsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('order_models');
+        //
     }
 }
