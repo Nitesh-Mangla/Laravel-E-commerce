@@ -8,6 +8,7 @@
                 <div class="col-md-8">
                     <div class="user-menu">
                         <ul>
+                          <li><a href="{{ url('/') }}"><i class="fa fa-user"></i> Home</a></li>
                             <li><a href="#"><i class="fa fa-user"></i> My Account</a></li>
                             <li><a href="#"><i class="fa fa-heart"></i> Wishlist</a></li>
                             <li><a href="{{url('card')}}"><i class="fa fa-user"></i> My Cart</a></li>

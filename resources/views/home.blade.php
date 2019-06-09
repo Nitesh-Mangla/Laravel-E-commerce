@@ -1,6 +1,6 @@
 @extends('welcome')
 @push('css')
-@include('layouts.resource');
+@include('layouts.resource')
 @endpush
 
 @section('header')
@@ -9,7 +9,7 @@
 
 @section('body')
 
-     
+   
 <div class="site-branding-area">
         <div class="container">
             <div class="row">
@@ -44,7 +44,7 @@
                         @endauth
                         <li><a href="#">Category</a></li>
                         <li><a href="#">Others</a></li>
-                        <li><a href="{{url('contact')}}">Contact</a></li>>
+                        <li><a href="{{url('contact')}}">Contact</a></li>
                     </ul>
                 </div>  
             </div>

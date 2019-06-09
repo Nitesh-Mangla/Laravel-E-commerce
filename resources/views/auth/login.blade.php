@@ -18,6 +18,18 @@
                 
 
                <div class="login-form">
+                @if( Session::has('message') )
+        <div class="alert alert-warning alert-dismissible">
+            <strong>{{ Session::get('message') }}</strong>.<a href="{{url('verified')}}" alt="account verify">Click to verify</a>
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+        </div>
+        @endif
+        @if( Session::has('verify_mail') )
+        <div class="alert alert-warning alert-dismissible">
+            <strong>{{ Session::get('verify_mail') }}</strong>.
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+        </div>
+        @endif
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
                          <h2 class="text-center">Sign in</h2>   
@@ -55,7 +67,7 @@
                     <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
             <label class="pull-left checkbox-inline"><input type="checkbox"> Remember me</label>
-            <a href="#" class="pull-right">Forgot Password?</a>
+            <a href="{{url('forgetPassword')}}" class="pull-right">Forgot Password?</a>
         </div>
                        
 

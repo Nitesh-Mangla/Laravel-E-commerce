@@ -2,7 +2,7 @@
 use Illuminate\Support\Facades\Auth;
 use App\user;
 use App\card_details;
-
+use App\country;
 if( !function_exists( 'checkoutAmount' ) )
 {
 	 function checkoutAmount()
@@ -19,6 +19,15 @@ if( !function_exists( 'checkoutAmount' ) )
 			return 0;
 		} 
 		
+	}
+}
+
+if( !function_exists('getCountry') )
+{
+	 function getCountry()
+	{
+		$country = DB::table('country')->get();
+		return $country;
 	}
 }
 

@@ -5,7 +5,12 @@
                 <div class="col-md-3 col-sm-6">
                     <div class="footer-about-us">
                         <h2>Mangla<span>&nbsp Store</span></h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis sunt id doloribus vero quam laborum quas alias dolores blanditiis iusto consequatur, modi aliquid eveniet eligendi iure eaque ipsam iste, pariatur omnis sint! Suscipit, debitis, quisquam. Laborum commodi veritatis magni at?</p>
+                        <p>O-181 Geeta Enclave Vani Vihar Uttam Nagar New Delhi-110059<br>
+                            Telephone :- +918860315256,<br>
+                            Mobile No:- +918700469644<br>
+                            Email:- niteshmangla1992@gmail.com<br>
+                                    kapilmangla1994@gmail.com
+                        </p>
                         <div class="footer-social">
                             <a href="#" target="_blank"><i class="fa fa-facebook"></i></a>
                             <a href="#" target="_blank"><i class="fa fa-twitter"></i></a>
@@ -23,7 +28,7 @@
                             <li><a href="#">Order history</a></li>
                             <li><a href="#">Wishlist</a></li>
                             <li><a href="#">Vendor contact</a></li>
-                            <li><a href="#">Front page</a></li>
+                            <li><a href="{{url('/')}}">Front page</a></li>
                         </ul>                        
                     </div>
                 </div>
@@ -46,9 +51,10 @@
                         <h2 class="footer-wid-title">Newsletter</h2>
                         <p>Sign up to our newsletter and get exclusive deals you wont find anywhere else straight to your inbox!</p>
                         <div class="newsletter-form">
-                            <form action="#">
-                                <input type="email" placeholder="Type your email">
-                                <input type="submit" value="Subscribe">
+                            <form action="{{ url('newsletter') }}" method="post">
+                                @csrf
+                                <input type="email" placeholder="Type your email" name="email">
+                                <input type="submit" value="Subscribe" style="    width: 140px;">
                             </form>
                         </div>
                     </div>

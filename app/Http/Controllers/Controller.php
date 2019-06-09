@@ -29,8 +29,7 @@ class Controller extends BaseController
     {
         Session::forget('cardData');
         Session::put('cardData', $request->all());
-        //dd(Session::get('cardData'));
-    	return view('checkout', ['tprice' => checkoutAmount(), 'userProfile' =>  json_decode($profileData->getUserProfileDetails())]);
+    	return view('checkout', ['tprice' => checkoutAmount(), 'userProfile' =>  json_decode($profileData->getUserProfileDetails()), 'country' => getCountry()]);
     }
 
     public function card( Request $request )
@@ -67,5 +66,14 @@ class Controller extends BaseController
     public function contactForm()
     {
         return view('contact');
+    }
+
+    public function forgetPassword( Request $request )
+    {
+        if(!empty( $request->id ) )
+        {
+            return view('/changePassword' ,['id' => $request->id]);
+        }
+        return view('forgetPassword');
     }
 }

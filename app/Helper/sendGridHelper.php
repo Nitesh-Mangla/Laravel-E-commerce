@@ -3,8 +3,14 @@
 if( !function_exists( 'SendMail' ) )
 {
 
-	 function SendMail( $array )
+	 function SendMail( $array, $sender = '' )
 	{
+		if( !empty( $sender ) )
+		{
+			$array['email'] = $sender;
+			$array['sender_name'] = 'Nitesh Mangla';
+		}
+
 		$SENDGRID_API_KEY = '';
         $email = new \SendGrid\Mail\Mail(); 
 		$email->setFrom("niteshmangla1992@gmail.com", "Nitesh Mangla");
@@ -14,11 +20,11 @@ if( !function_exists( 'SendMail' ) )
 		$email->addContent(
 		    "text/html", "<strong>".$array['body']."</strong>"
 		);
-		$sendgrid = new \SendGrid('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');
+		$sendgrid = new \SendGrid('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');
 		try {
 		    $response = $sendgrid->send($email);
-		    echo "<pre>";
-		    if( $response->statusCode() == '202')
+		    
+		    if( $response->statusCode() == '202' || $response->statusCode() == '200')
 		    {
 		    	return true;
 		    }else{
