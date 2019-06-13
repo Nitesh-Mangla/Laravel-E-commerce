@@ -7,7 +7,7 @@ use App\Http\Controllers\paytmKit\configPaytm;
 use App\Services\orderPlacedService;
 use App\User;  
 use Redirect;
-
+use Session;
 class orderController extends Controller
 {
 

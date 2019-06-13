@@ -24,7 +24,6 @@ class CustomforgotPasswordController extends Controller
         if( $validator->fails() )
         {
             Session::flash( 'message', $validator->messages()->first() );
-            
         }
         else
         {
@@ -53,7 +52,7 @@ class CustomforgotPasswordController extends Controller
             }
             else
             {
-                Session::flash('message', 'Email does not exits in our records');
+                Session::flash('message', 'Email does not exists in our records');
             }
            
         }

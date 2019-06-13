@@ -20,7 +20,7 @@ if( !function_exists( 'SendMail' ) )
 		$email->addContent(
 		    "text/html", "<strong>".$array['body']."</strong>"
 		);
-		$sendgrid = new \SendGrid('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');
+		$sendgrid = new \SendGrid('');
 		try {
 		    $response = $sendgrid->send($email);
 		    
@@ -30,9 +30,7 @@ if( !function_exists( 'SendMail' ) )
 		    }else{
 		    	return false;
 		    }
-			    // print_r($response->headers());
-			    // print $response->body() . "\n";
-		  
+			   		  
 		} catch (Exception $e) {
 		    echo 'Caught exception: '. $e->getMessage() ."\n";
 		}

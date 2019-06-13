@@ -88,7 +88,7 @@ class SocialAuthGoogleController extends Controller
             );
 
                 if(SendMail( $emailInfo )){  
-                    Session::flash('verify_mail', 'We have sent verification Mail to Verify Your Account');
+                    Session::flash('verify_mail', 'We have sent verification Mail to '.Session::get('email'));
                     return redirect('/login');
                 }
                 else{

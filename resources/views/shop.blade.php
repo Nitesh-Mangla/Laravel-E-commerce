@@ -63,7 +63,7 @@
                 <div class="col-md-3 col-sm-6">
                     <div class="single-shop-product">
                         <div class="product-upper">
-                            <img src="img/{{$products[$i]->image}}" alt="">
+                            <img src="img/{{$products[$i]->image}}" alt="" class="shop_img" >
                         </div>
                         <h2><a href="">{{$products[$i]->product_name}}</a></h2>
                         <div class="product-carousel-price">

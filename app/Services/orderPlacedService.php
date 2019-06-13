@@ -23,7 +23,7 @@ class orderPlacedService
 			$orderPlaced->payment_mode = 'paytm';
 			$orderPlaced->quantity = $request['quantity'][$i];
 			$orderPlaced->price = $request['price'][$i];
-			$orderPlaced->totalPrice = $request['price'][$i];
+			$orderPlaced->totalPrice = $request['price'][$i]*$request['quantity'][$i];
 			$orderPlaced->phoneNo = $request['phone'];
 			$orderPlaced->address = $request['address'];
 			$orderPlaced->save();
